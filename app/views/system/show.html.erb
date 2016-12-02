@@ -1,0 +1,91 @@
+  <div class="page-header">
+    <h1>San Luis Obispo Residential Pool Pumps</h1>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-2">
+      <div class="well">
+        <ul class="nav nav-pills nav-stacked" id="stacked-menu">
+          <li role="presentation" class="active"><a href="#">Devices</a></li>
+          <li role="presentation"><a href="#">Groups</a></li>
+          <li role="presentation"><a href="#">Enrollments</a></li>
+          <li role="presentation"><a href="#">Events</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-10">
+      <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addModal">
+       <span class="glyphicon glyphicon-plus-sign"></span> Add Device
+     </button>
+
+
+    <% if @devices.blank? %>
+         <h1>There are currently no devices in this system.</h1>
+     <% else %>
+     <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Device Key</th>
+          <th>Name</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+
+      <% @devices.each do |c| %> 
+        <tr>
+          <td><%= c.key %></td>
+          <td><%= c.name %></td>
+          <td><div class="btn-group">
+  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Actions <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu">
+    <li><a href="#">Rename</a></li>
+    <li><a href="#">Deactivate</a></li>
+    <li><a href="#">Manage Groups</a></li>
+    <li><a href="#">Manage Programs</a></li>
+  </ul>
+</div>
+</td>
+</tr>
+<% end %>
+      </tbody>
+    </table>
+
+    <% end %>
+
+
+
+  </div>
+
+      <!-- AddModal -->
+ <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Add Device</h4>
+      </div>
+
+
+      <%= form_tag :action => 'create_device' do %>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="system_name">Name:</label>
+          <%= text_field 'devices', 'name', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag "Add", class: 'btn btn-success' %>
+      </div>
+      <% end -%>
+
+
+    </div>
+  </div>
+</div>

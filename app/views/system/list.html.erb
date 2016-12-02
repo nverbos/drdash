@@ -1,0 +1,68 @@
+   <div class="jumbotron">
+    <h1>Energy Systems</h1> 
+    <p>Energy systems represent a distinct system of devices to be controlled.  For example: a small business, a factory, or a larger system such as all the pool pumps in an area.  Devices in one system cannot be in another system.</p> 
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addModal">
+       <span class="glyphicon glyphicon-plus-sign"></span> Create System
+     </button>
+     <% if @systems.blank? %>
+     <h1>There are currently no energy systems.</h1>
+     <% else %>
+     <h1>Select an Energy System:</h1>
+
+     <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>System Name</th>
+          <th>Owner</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @systems.each do |c| %> 
+        <tr>
+          <td><%= c.name %></td>
+          <td>example@test.com</td>
+          <td><%= link_to "Select", {:action => 'show', :id => c.id}, {:class => "btn btn-primary"} %></td>
+          <td><%= link_to "Delete", {:action => 'delete', :id => c.id}, {:class => "btn btn-danger"} %></td>
+          <td></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create System</h4>
+      </div>
+
+
+      <%= form_tag :action => 'create' do %>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="system_name">Name:</label>
+          <%= text_field 'systems', 'name', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag "Create", class: 'btn btn-success' %>
+      </div>
+      <% end -%>
+
+
+    </div>
+  </div>
+</div>
