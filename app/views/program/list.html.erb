@@ -1,0 +1,66 @@
+  <div class="jumbotron">
+    <h1>Energy Programs</h1> 
+    <p>Energy Pograms contain energy events that indicate times when energy use should be reduced.</p> 
+  </div>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addModal">
+       <span class="glyphicon glyphicon-plus-sign"></span> Create Program
+     </button>
+     <% if @programs.blank? %>
+     <h1>There are currently no Programs.</h1>
+     <% else %>
+     <h1>Select a Program:</h1>
+
+     <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Program Name</th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @programs.each do |c| %> 
+        <tr>
+          <td><%= c.name %></td>
+          <td><%= link_to "Select", {:action => 'show', :id => c.id}, {:class => "btn btn-primary"} %></td>
+          <td><%= link_to "Delete", {:action => 'delete', :id => c.id}, {:class => "btn btn-danger"} %></td>
+          <td></td>
+        </tr>
+        <% end %>
+      </tbody>
+    </table>
+    <% end %>
+  </div>
+</div>
+
+<div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Create Program</h4>
+      </div>
+
+
+      <%= form_tag :action => 'create' do %>
+      <div class="modal-body">
+
+        <div class="form-group">
+          <label for="program_name">Name:</label>
+          <%= text_field 'program', 'name', class: 'form-control' %>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <%= submit_tag "Create", class: 'btn btn-success' %>
+      </div>
+      <% end -%>
+
+
+    </div>
+  </div>
+</div>

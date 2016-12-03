@@ -8,9 +8,9 @@
     <div class="col-md-2">
       <div class="well">
         <ul class="nav nav-pills nav-stacked" id="stacked-menu">
-          <li role="presentation" class="active"><a href="#">Devices</a></li>
+          <li role="presentation"><a href="#">Devices</a></li>
           <li role="presentation"><a href="#">Groups</a></li>
-          <li role="presentation"><a href="#">Enrollments</a></li>
+          <li role="presentation" class="active"><a href="#">Enrollments</a></li>
           <li role="presentation"><a href="#">Events</a></li>
         </ul>
       </div>
@@ -21,35 +21,22 @@
      </button>
 
 
-    <% if @devices.blank? %>
-         <h1>There are currently no devices in this system.</h1>
+    <% if @programs.blank? %>
+         <h1>This system is not enrolled in any programs.</h1>
      <% else %>
      <table class="table table-striped">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Device Key</th>
+          <th>Program Name</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
 
-      <% @devices.each do |c| %> 
+      <% @programs.each do |c| %> 
         <tr>
           <td><%= c.name %></td>
-          <td><%= c.key %></td>
-          <td><div class="btn-group">
-  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Actions <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu">
-    <li><a href="#">Rename</a></li>
-    <li><a href="#">Deactivate</a></li>
-    <li><a href="#">Manage Groups</a></li>
-    <li><a href="#">Manage Programs</a></li>
-  </ul>
-</div>
-</td>
+          <td><%= link_to "Unenroll", {:action => 'remove_program', :program_id => c.id, :system_id => @system.id}, {:class => "btn btn-danger"} %></td>
 </tr>
 <% end %>
       </tbody>
@@ -71,12 +58,13 @@
       </div>
 
 
-      <%= form_tag({controller: "device", action: "create"}, method: "post") do %>
+      <%= form_tag({controller: "system", action: "add_program"}, method: "post") do %>
       <div class="modal-body">
 
         <div class="form-group">
           <label for="system_name">Name:</label>
           <%= text_field_tag :name, 'Device Name', class: 'form-control' %>
+          <%= collection_select(:b, :subject_id, @all_programs, :id, :name, prompt: true) %>
           <%= hidden_field_tag :system_id, params[:id] %>
         </div>
       </div>

@@ -1,8 +1,13 @@
 class DeviceController < ApplicationController
-  def create
-    @system = System.find(params[:system_id])
-    @system.devices.create()
+  def device_params
+    params.permit(:system_id, :name)
+  end
 
-    redirect_to controller: 'system', action: 'show', id: 2
+  def create
+    @system = System.find(device_params[:system_id])
+    @device = Device.new(device_params)
+
+    @device.save
+    redirect_to controller: 'system', action: 'show', id: device_params[:system_id]
   end
 end 

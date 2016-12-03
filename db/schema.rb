@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20161130234306) do
 
   create_table "devices", force: :cascade do |t|
     t.string   "name"
-    t.string   "key"
+    t.text     "key"
     t.integer  "system_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

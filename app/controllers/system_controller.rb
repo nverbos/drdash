@@ -8,6 +8,25 @@ class SystemController < ApplicationController
     @devices = @system.devices
   end
 
+  def show_programs
+    @system = System.find(params[:id])
+    @programs = @system.programs.distinct
+    @all_programs = Program.all - @programs
+  end
+
+  def add_program
+    @system = System.find(params[:id])
+    @system.programs << Program.find(params[:program_id])
+  end
+
+  def remove_program
+    @system = System.find(params[:program_id])
+    @program = Program.find(params[:system_id])
+    @system.programs.delete(@program)
+    redirect_to :action => 'show_programs', :id => @system.id
+  end
+
+
   def system_params
     params.require(:systems).permit(:name)
   end
@@ -20,33 +39,8 @@ class SystemController < ApplicationController
     end
   end
 
-  def device_params
-    params.require(:devices).permit(:name)
-  end
-
-  def create_device
-    @system = System.find(2)
-    @system.devices.create(device_params)
-
-    redirect_to controller: 'system', action: 'show', id: 2
-  end
-
-  def edit
-    @system = System.find(params[:system])
-  end
-
   def system_param
     params.require(:system).permit(:name)
-  end
-
-  def update
-    @system = System.find(params[:id])
-    
-    if @system.update_attributes(system_param)
-      redirect_to :action => 'show', :id => @system
-    else
-      render :action => 'edit'
-    end
   end
 
   def delete
