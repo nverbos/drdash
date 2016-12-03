@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get 'system/show_programs'
   post 'system/add_program'
   get 'system/remove_program'
+  get 'system/show_events'
 
   get 'program/list'
   get 'program/show'

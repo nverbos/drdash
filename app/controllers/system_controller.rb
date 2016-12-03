@@ -14,14 +14,25 @@ class SystemController < ApplicationController
     @all_programs = Program.all - @programs
   end
 
-  def add_program
+  def show_events
     @system = System.find(params[:id])
-    @system.programs << Program.find(params[:program_id])
+    @events = @system.events
+  end
+
+  def program_param
+    params.require(:enroll).permit(:program_id, :system_id)
+    
+  end
+
+  def add_program
+    @system = System.find(program_param[:system_id])
+    @system.programs << Program.find(program_param[:program_id])
+    redirect_to :action => 'show_programs', :id => @system.id
   end
 
   def remove_program
-    @system = System.find(params[:program_id])
-    @program = Program.find(params[:system_id])
+    @system = System.find(params[:system_id])
+    @program = Program.find(params[:program_id])
     @system.programs.delete(@program)
     redirect_to :action => 'show_programs', :id => @system.id
   end

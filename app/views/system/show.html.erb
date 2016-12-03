@@ -8,10 +8,10 @@
     <div class="col-md-2">
       <div class="well">
         <ul class="nav nav-pills nav-stacked" id="stacked-menu">
-          <li role="presentation" class="active"><a href="#">Devices</a></li>
+          <li role="presentation" class="active"><%= link_to "Devices", :controller => 'system', :action => 'show', :id => @system.id %></li>
           <li role="presentation"><a href="#">Groups</a></li>
-          <li role="presentation"><a href="#">Enrollments</a></li>
-          <li role="presentation"><a href="#">Events</a></li>
+          <li role="presentation"><%= link_to "Enrollments", :controller => 'system', :action => 'show_programs', :id => @system.id %></li>
+          <li role="presentation"><%= link_to "Events", :controller => 'system', :action => 'show_events', :id => @system.id %></li>
         </ul>
       </div>
     </div>

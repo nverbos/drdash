@@ -8,16 +8,16 @@
     <div class="col-md-2">
       <div class="well">
         <ul class="nav nav-pills nav-stacked" id="stacked-menu">
-          <li role="presentation"><a href="#">Devices</a></li>
+          <li role="presentation"><%= link_to "Devices", :controller => 'system', :action => 'show', :id => @system.id %></li>
           <li role="presentation"><a href="#">Groups</a></li>
-          <li role="presentation" class="active"><a href="#">Enrollments</a></li>
-          <li role="presentation"><a href="#">Events</a></li>
+          <li role="presentation" class="active"><%= link_to "Enrollments", :controller => 'system', :action => 'show_programs', :id => @system.id %></li>
+          <li role="presentation"><%= link_to "Events", :controller => 'system', :action => 'show_events', :id => @system.id %></li>
         </ul>
       </div>
     </div>
     <div class="col-md-10">
       <button class="btn btn-success pull-right" data-toggle="modal" data-target="#addModal">
-       <span class="glyphicon glyphicon-plus-sign"></span> Add Device
+       <span class="glyphicon glyphicon-plus-sign"></span> Enroll in program
      </button>
 
 
@@ -54,7 +54,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Add Device</h4>
+        <h4 class="modal-title" id="myModalLabel">Enroll in Program</h4>
       </div>
 
 
@@ -62,15 +62,15 @@
       <div class="modal-body">
 
         <div class="form-group">
-          <label for="system_name">Name:</label>
-          <%= text_field_tag :name, 'Device Name', class: 'form-control' %>
-          <%= collection_select(:b, :subject_id, @all_programs, :id, :name, prompt: true) %>
-          <%= hidden_field_tag :system_id, params[:id] %>
+          <label for="system_name">Program:</label>
+          <%= collection_select(:enroll, :program_id, @all_programs, :id, :name, {prompt: true}, {:class=>'form-control'}) %>
+
+          <%= hidden_field_tag 'enroll[system_id]', params[:id] %>
         </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <%= submit_tag "Add", class: 'btn btn-success' %>
+        <%= submit_tag "Enroll", class: 'btn btn-success' %>
       </div>
       <% end -%>
 

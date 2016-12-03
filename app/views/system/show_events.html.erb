@@ -1,0 +1,47 @@
+  <div class="page-header">
+    <h1><%= @system.name %></h1>
+  </div>
+
+
+
+  <div class="row">
+    <div class="col-md-2">
+      <div class="well">
+        <ul class="nav nav-pills nav-stacked" id="stacked-menu">
+          <li role="presentation"><%= link_to "Devices", :controller => 'system', :action => 'show', :id => @system.id %></li>
+          <li role="presentation"><a href="#">Groups</a></li>
+          <li role="presentation"><%= link_to "Enrollments", :controller => 'system', :action => 'show_programs', :id => @system.id %></li>
+          <li role="presentation" class="active"><%= link_to "Events", :controller => 'system', :action => 'show_events', :id => @system.id %></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-10">
+
+
+
+    <% if @events.blank? %>
+         <h1>This system does not have any events scheduled.</h1>
+     <% else %>
+     <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>StartTime</th>
+          <th>Duration</th>
+        </tr>
+      </thead>
+      <tbody>
+
+      <% @events.each do |c| %> 
+        <tr>
+          <td><%= c.start %></td>
+          <td><%= c.duration %></td>
+</tr>
+<% end %>
+      </tbody>
+    </table>
+
+    <% end %>
+
+
+
+  </div>
