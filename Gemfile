@@ -47,5 +47,9 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise', '~> 4.2'
-gem 'sqlite3'
+gem 'pg'
 gem 'has_secure_token'
+
+group :development, :test do
+  gem 'sqlite3'
+end
