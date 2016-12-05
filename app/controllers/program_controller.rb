@@ -1,4 +1,5 @@
 class ProgramController < ApplicationController
+  before_action :authenticate_user!
   def list
     @programs = Program.all
   end

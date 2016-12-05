@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   post 'device/create'
   get 'device/delete'
+  get 'device/show_events'
 
   post 'event/create'
   get 'event/delete'

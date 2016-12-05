@@ -1,4 +1,5 @@
 class SystemController < ApplicationController
+  before_action :authenticate_user!
   def list
     @systems = System.all
   end

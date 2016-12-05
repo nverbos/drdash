@@ -24,8 +24,8 @@
         <a class="navbar-brand" href="#">DRDash</a>
       </div>
       <ul class="nav navbar-nav navbar-right">
-        <li class="<%= 'active' if params[:controller] == 'program' %>"><%= link_to "Programs", :controller => 'program', :action => 'list' %></li>
-        <li class="<%= 'active' if params[:controller] == 'system' %>"><%= link_to "Systems", :controller => 'system', :action => 'list' %></li>
+        <li class="<%= 'active' if params[:controller] == 'program' %>"><a href="#">Programs</a></li>
+        <li class="<%= 'active' if params[:controller] == 'system' %>"><a href="#">Systems</a></li>
         <li><a href="#">Logout</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->

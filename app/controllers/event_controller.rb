@@ -1,4 +1,5 @@
 class EventController < ApplicationController
+  before_action :authenticate_user!
   def event_params
     params.permit(:program_id, :start, :duration)
   end
