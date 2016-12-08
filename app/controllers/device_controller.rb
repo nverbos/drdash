@@ -15,7 +15,7 @@ class DeviceController < ApplicationController
   def show_events
     @device = Device.where(key: params[:key])
     @system = System.find(@device.first.system_id)
-    @events = @system.events.distinct
+    @events = @system.events.where('start > ?', DateTime.now)
     render json: @events
   end
 end 

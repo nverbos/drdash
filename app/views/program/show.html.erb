@@ -19,15 +19,15 @@
       <thead>
         <tr>
           <th>Start Time</th>
-          <th>Duration</th>
+          <th>End Time</th>
           <th></th>
         </tr>
       </thead>
       <tbody>
       <% @devices.each do |c| %> 
         <tr>
-          <td><%= c.start %></td>
-          <td><%= c.duration%></td>
+          <td><%= c.start.strftime("%m/%d/%Y %l:%M:%S%p") %></td>
+          <td><%= c.end.strftime("%m/%d/%Y %l:%M:%S%p") %></td>
           <td><%= link_to "Cancel", {:controller => 'event', :action => 'delete', :id => c.id, :program_id => @program.id}, {:class => "btn btn-danger"} %></td>
         </tr>
 <% end %>
@@ -56,11 +56,11 @@
 
         <div class="form-group">
           <label for="start">Start Time:</label>
-          <%= text_field_tag :start, '12/02/2016 4:49 PM', class: 'form-control' %>
+          <%= datetime_select('', 'start', options = {include_seconds: true}) %>
         </div>
         <div class="form-group">
-          <label for="duration">Duration:</label>
-          <%= text_field_tag :duration, 'HH:MM:SS', class: 'form-control' %>
+          <label for="duration">End Time:</label>
+          <%= datetime_select('', 'end', options = {include_seconds: true}) %>
         </div>
       </div>
       <div class="modal-footer">

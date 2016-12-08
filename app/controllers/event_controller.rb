@@ -1,7 +1,7 @@
 class EventController < ApplicationController
   before_action :authenticate_user!
   def event_params
-    params.permit(:program_id, :start, :duration)
+    params.permit(:program_id, :start, :end)
   end
 
   def create
@@ -16,6 +16,4 @@ class EventController < ApplicationController
     Event.find(params[:id]).destroy 
     redirect_to controller: 'program', action: 'show', id: params[:program_id]
   end
-
-
 end

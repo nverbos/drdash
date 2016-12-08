@@ -25,16 +25,16 @@
      <table class="table table-striped">
       <thead>
         <tr>
-          <th>StartTime</th>
-          <th>Duration</th>
+          <th>Start Time</th>
+          <th>End Time</th>
         </tr>
       </thead>
       <tbody>
 
       <% @events.each do |c| %> 
         <tr>
-          <td><%= c.start %></td>
-          <td><%= c.duration %></td>
+          <td><%= c.start.strftime("%m/%d/%Y %l:%M:%S%p") %></td>
+          <td><%= c.end.strftime("%m/%d/%Y %l:%M:%S%p") %></td>
 </tr>
 <% end %>
       </tbody>

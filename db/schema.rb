@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20161130234306) do
 
   create_table "devices", force: :cascade do |t|
     t.string   "name"
-    t.text     "key"
+    t.string   "key"
     t.integer  "system_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20161130234306) do
 
   create_table "events", force: :cascade do |t|
     t.datetime "start"
-    t.time     "duration"
+    t.datetime "end"
     t.integer  "program_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
